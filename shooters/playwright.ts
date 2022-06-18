@@ -77,8 +77,7 @@ export default (
             console.log(
               `Capturing: ${path.relative(process.cwd(), screenshotPath)}`
             );
-            await page.screenshot({
-              fullPage: true,
+            await page.locator('body').screenshot({
               path: screenshotPath,
             });
           }
