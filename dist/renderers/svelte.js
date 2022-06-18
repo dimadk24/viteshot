@@ -1,0 +1,26 @@
+async function renderScreenshots(components) {
+    // TODO: Support Wrapper in Svelte.
+    const root = document.getElementById("root");
+    for (const [name, Component] of components) {
+        if (typeof Component !== "function") {
+            // This is not a component.
+            continue;
+        }
+        root.innerHTML = "";
+        try {
+            const component = new Component({
+                target: root,
+                props: {},
+            });
+            if (component.beforeScreenshot) {
+                await component.beforeScreenshot(root);
+            }
+        }
+        catch (e) {
+            root.innerHTML = `<pre class="viteshot-error">${e}\n${e.stack}</pre>`;
+        }
+        await window.__takeScreenshot__(name);
+    }
+}
+
+export { renderScreenshots };
