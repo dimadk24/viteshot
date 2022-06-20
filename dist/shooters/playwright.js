@@ -57,7 +57,7 @@ var playwright = (browserType, options = {}) => {
                         });
                     }
                     console.log(`Capturing: ${path__default['default'].relative(process.cwd(), screenshotPath)}`);
-                    await page.locator('body').screenshot({
+                    await page.locator('#root > *').screenshot({
                         path: screenshotPath,
                     });
                 });
