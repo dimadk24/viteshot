@@ -84,7 +84,7 @@ export async function startRenderer(options: {
         if (frameworkConfig.defaultImports) {
           return `[\`${componentBaseName}\`, componentModule${i}],`;
         } else {
-          return `...Object.entries(componentModule${i}).map(([name, component]) => {
+          return `...Object.entries(componentModule${i}[Object.keys(componentModule${i})[0]]).map(([name, component]) => {
               return [\`${componentBaseName}-\${name}\`, component];
             }),`;
         }
